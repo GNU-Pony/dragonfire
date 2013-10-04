@@ -40,8 +40,12 @@ fi
 
 while true; do
     read -r line
-    if [ -z "$line" ]; then # Exit on EOF
-	exit 0
+    if [ ! $? = 0 ]; then # Exit on EOF
+	if [ $? = 1 ]; then
+	    exit 0
+	else
+	    exit $?
+	fi
     fi
     
     pkgname="$(cut -d ' ' -f 1 <<< "${line}")"
