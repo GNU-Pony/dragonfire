@@ -40,6 +40,10 @@ fi
 
 while true; do
     read -r line
+    if [ -z "$line" ]; then # Exit on EOF
+	exit 0
+    fi
+    
     pkgname="$(cut -d ' ' -f 1 <<< "${line}")"
     pkgver="$(cut -d ' ' -f 2 <<< "${line}")"
     scrollfile="$(cut -d ' ' -f 1,2 --complement <<< "${line}")"
